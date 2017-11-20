@@ -1,12 +1,14 @@
 import java.util.Arrays;
 
 public class FastCollinearPoints {
-	private Point[] points;
 	private final int N;
 	private final int N_LINE;
 	private LineSegment[] segments;
 	public FastCollinearPoints(Point[] points) { // finds all line segments containing 4 points
-		this.points = points;
+		if(points == null) throw new NullPointerException("Points is null");
+		for(int i = 0; i < points.length; i++){
+			if(points[i] == null) throw new IllegalArgumentException("Points is Illegal");
+		}
 		N = points.length;
 		N_LINE = N * (N-1);
 		segments = initsegments(points);
@@ -21,6 +23,7 @@ public class FastCollinearPoints {
 	}
 	
 	private LineSegment[] initsegments(Point[] points) {
+		Arrays.sort(points);
 		LineSegment[] segs = new LineSegment[N_LINE];
 		int nbSegments = 0;
 		for(int i = 0 ; i < N-3; i++){

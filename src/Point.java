@@ -49,9 +49,9 @@ public class Point implements Comparable<Point> {
      * @return the slope between this point and the specified point
      */
     public double slopeTo(Point that) {
-        if(this.x == that.x) return 0L;
-        if(this.y == that.y) return Double.MAX_VALUE;
-        if(this.y == that.y && this.x == that.x) return Double.MIN_VALUE;
+    	if(this.y == that.y && this.x == that.x) return Double.NEGATIVE_INFINITY;
+    	if(this.x == that.x) return Double.POSITIVE_INFINITY;
+    	if(this.y == that.y) return 0.0;
         return (double)(that.y-this.y)/(that.x-this.x);
     }
 
@@ -103,18 +103,20 @@ public class Point implements Comparable<Point> {
      * Unit tests the Point data type.
      */
     public static void main(String[] args) {
-        /* YOUR CODE HERE */
+        Point p = new Point(129, 448);
+        Point q = new Point(129, 137);
+        System.out.println(p.slopeOrder().compare(q, q));
     }
     
     private class SlopeComparator implements Comparator<Point>{
 		@Override
 		public int compare(Point p1, Point p2) {
-			double c1 = p1.slopeTo(Point.this);
-			double c2 = p2.slopeTo(Point.this);
-			double c = c1 - c2;
+			Double c1 = Point.this.slopeTo(p1);
+			Double c2 = Point.this.slopeTo(p2);
+			Double c = c1 - c2;
 			if ( c < 0) return -1;
-			else if (c == 0) {
-				return p1.compareTo(p2);
+			else if (c == 0 || c.equals(Double.NaN)) {
+				return 0;
 			}else {
 				return 1;
 			}
