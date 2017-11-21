@@ -1,3 +1,4 @@
+package tiendm;
 /*************************************************************************
  *  Compilation:  javac LineSegment.java
  *  Execution:    none
