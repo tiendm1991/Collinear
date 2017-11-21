@@ -16,10 +16,10 @@ public class FastCollinearPoints {
 
 	private void validPoints(Point[] points) {
 		if (points == null)
-			throw new NullPointerException("Points is null");
+			throw new IllegalArgumentException("Points is null");
 		for (int i = 0; i < points.length; i++) {
 			if (points[i] == null)
-				throw new NullPointerException("Point is null");
+				throw new IllegalArgumentException("Point is null");
 		}
 		Arrays.sort(points);
 		for (int i = 1; i < points.length; i++) {
